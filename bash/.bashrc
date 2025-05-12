@@ -121,11 +121,6 @@ HISTTIMEFORMAT="%F %T "
 # don't add the listed commands to the history file
 HISTIGNORE="vi:vim:nvim:\:q:l[fs]:pwd:[bf]g:tmuxa"
 
-# starts ssh-agent if another program hasn't done so
-if [ -z $SSH_AUTH_SOCK ]; then
-  eval "$(ssh-agent -s)"
-fi
-
 # shell integrations
 eval "$(bob complete bash)"
 eval "$(fnm env --use-on-cd --shell bash)"
@@ -158,3 +153,9 @@ just() {
     stow -d ~/stow "$project_name" 2>/dev/null || echo "Stow failed; files are in $install_prefix"
   fi
 }
+
+# starts ssh-agent if another program hasn't done so
+if [ -z $SSH_AUTH_SOCK ]; then
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+fi

@@ -72,18 +72,34 @@ $env.config.keybindings = [
 
 $env.config.buffer_editor = 'nvim'
 
-###############
-### ALIASES ###
-###############
+####################
+### INTEGRATIONS ###
+####################
+
+mkdir ($nu.data-dir | path join "vendor/autoload")
+
+carapace _carapace nushell | save -f ($nu.data-dir | path join "vendor/autoload/carapace.nu")
+$env.CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense"
+
+fnm env --json | from json | load-env
+$env.PATH = ($env.PATH | prepend $"($env.FNM_MULTISHELL_PATH)/bin")
+
+starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+$env.STARSHIP_LOG = 'error'
+
+zoxide init nushell | save -f ($nu.data-dir | path join "vendor/autoload/zoxide.nu")
+
+# my entries are being duplicated and I don't want to debug that
+$env.PATH = ($env.PATH | uniq)
 
 # starts ssh-agent if another program hasn't done so
 do --env {
-  if not ($env.SSH_AUTH_SOCK | is-empty) {
+  if not ($env.SSH_AUTH_SOCK? | is-empty) {
     return
   }
 
   let ssh_agent_file = (
-    $nu.temp-path | path join $"ssh-agent-($env.USER? | default $env.USERNAME).nuon"
+    $nu.temp-path | path join $"ssh-agent-($env.USER).nuon"
   )
 
   if ($ssh_agent_file | path exists) {
@@ -104,24 +120,6 @@ do --env {
   | into record
   load-env $ssh_agent_env
   $ssh_agent_env | save --force $ssh_agent_file
+
+  ssh-add ~/.ssh/id_ed25519
 }
-
-####################
-### INTEGRATIONS ###
-####################
-
-mkdir ($nu.data-dir | path join "vendor/autoload")
-
-carapace _carapace nushell | save -f ($nu.data-dir | path join "vendor/autoload/carapace.nu")
-$env.CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense"
-
-fnm env --json | from json | load-env
-$env.PATH = ($env.PATH | prepend $"($env.FNM_MULTISHELL_PATH)/bin")
-
-starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
-$env.STARSHIP_LOG = 'error'
-
-zoxide init nushell | save -f ($nu.data-dir | path join "vendor/autoload/zoxide.nu")
-
-# my entries are being duplicated and I don't want to debug that
-$env.PATH = ($env.PATH | uniq)
