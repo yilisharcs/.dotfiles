@@ -63,3 +63,5 @@ export EDITOR=nvim
 export SUDO_EDITOR="$EDITOR"
 export MANPAGER="nvim +Man!"
 export LESS="-FRX"
+
+export BROWSER="wsl-browser"
