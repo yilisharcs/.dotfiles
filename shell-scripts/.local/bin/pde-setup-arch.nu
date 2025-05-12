@@ -1,5 +1,8 @@
 #!/usr/bin/env nu
 
+# This is incomplete and I'm not interested in finishing it.
+# It's basically a to-do list, non-functional. Very sad.
+
 ##################
 ### PACMAN-WSL ###
 ##################
