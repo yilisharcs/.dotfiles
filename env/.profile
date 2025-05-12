@@ -59,7 +59,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # }
 
-export SUDO_EDITOR=vim.tiny
 export EDITOR=nvim
+export SUDO_EDITOR="$EDITOR"
 export MANPAGER="nvim +Man!"
 export LESS="-FRX"
