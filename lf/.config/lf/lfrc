@@ -19,13 +19,14 @@ map ` !true
 map x $$f
 # map X !$f
 
+# wsl-open replaces $OPENER
 cmd open &{{
   case $(file --mime-type -Lb $f) in
     text/*) lf -remote "send $id \$$EDITOR \$fx";;
     inode/x-empty) lf -remote "send $id \$$EDITOR \$fx";;
     application/javascript) lf -remote "send $id \$$EDITOR \$fx";;
     application/json) lf -remote "send $id \$$EDITOR \$fx";;
-    *) for f in $fx; do $OPENER $f &> /dev/null & done;;
+    *) for f in $fx; do wsl-open $f &> /dev/null & done;;
   esac
 }}
 
@@ -176,4 +177,5 @@ map go cd ~/opt
 map gp cd ~/projects
 map gr cd ~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f
 map gs cd ~/stow
+map gw cd /mnt/c/Users
 map gz cd ~/.local/share/nvim/lazy

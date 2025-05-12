@@ -159,8 +159,6 @@ echo $'(ansi blue_bold)    Added Nushell plugins!(ansi reset)'
 ### DEV-ENV ###
 ###############
 
-sudo update-alternatives --set editor /usr/bin/vim.tiny
-
 # Stow symlinks whole dirs if they don't exist. Without this,
 # the system will cram stuff where it isn't supposed to go.
 [
