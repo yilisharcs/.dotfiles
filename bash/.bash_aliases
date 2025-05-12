@@ -15,7 +15,7 @@ alias pomo="porsmo"
 alias speedtest="speedtest-rs"
 alias visudo="sudo visudo"
 alias wiki="wiki-tui"
-alias yeet="sudo apt-get purge --auto-remove"
+alias yeet="sudo pacman -Rns"
 
 # shortcuts
 bind -x '"\C-g":"tmux-sessionizer"'

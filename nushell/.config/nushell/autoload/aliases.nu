@@ -12,7 +12,7 @@ alias pomo = porsmo
 alias speedtest = speedtest-rs
 alias visudo = sudo visudo
 alias wiki = wiki-tui
-alias yeet = sudo apt-get purge --autoremove
+alias yeet = sudo pacman -Rns
 
 # nushell scripts
 alias gitcon = gitcon.nu
