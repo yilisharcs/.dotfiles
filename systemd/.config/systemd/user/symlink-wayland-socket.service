@@ -1,0 +1,10 @@
+[Unit]
+Description=Symlink Wayland socket to XDG_RUNTIME_DIR
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ln -s /mnt/wslg/runtime-dir/wayland-0      /run/user/1000/
+ExecStart=/usr/bin/ln -s /mnt/wslg/runtime-dir/wayland-0.lock /run/user/1000/
+
+[Install]
+WantedBy=default.target
